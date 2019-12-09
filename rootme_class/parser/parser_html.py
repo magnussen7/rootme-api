@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 
 class parser_html(object):
-    def get_challenges_achievement(self, html):
+    def get_challenges_solved_total(self, html):
         """
         Split html string to retrieve number of solved challenges and total challenges
         @param self: Object himself
@@ -17,7 +17,7 @@ class parser_html(object):
         """
         regex_challenges_achievement = "(?P<challenges_solved>\d*)\/(?P<challenges_total>\d*)"
 
-        challenges_achievement = re.match(regex_challenges_achievement, str(html))
+        challenges_achievement = re.search(regex_challenges_achievement, str(html))
 
         if challenges_achievement is not None:
             if challenges_achievement.group('challenges_solved') == '':
@@ -30,38 +30,6 @@ class parser_html(object):
             return challenges_solved, challenges_total
         else:
             return None, None
-
-    def get_category_score(self, html):
-        """
-        Split html string to retrieve score in category, number of solved challenges in category and total challenges in category
-        @param self: Object himself
-        @type value: Object
-        @param html: Html to parse
-        @type value: string
-
-        @return: score in category, number of solved challenges in category and total challenges in category
-        @rtype: integer
-        """
-        regex_category_score = "\W(?P<category_score>\d*)\WPoints\W(?P<category_solved_challenges>\d*)\/(?P<category_total_challenges>\d*)\W*"
-
-        category_score = re.match(regex_category_score, str(html))
-
-        if category_score is not None:
-            if category_score.group('category_score') == '':
-                score = 0
-            else:
-                score = int(category_score.group('category_score'))
-
-            if category_score.group('category_solved_challenges') == '':
-                solved_challenges = 0
-            else:
-                solved_challenges = int(category_score.group('category_solved_challenges'))
-
-            total_challenges = int(category_score.group('category_total_challenges'))
-
-            return score, solved_challenges, total_challenges
-        else:
-            return None, None, None
 
     def get_challenge_validation(self, css_class):
         """
@@ -119,9 +87,9 @@ class parser_html(object):
         @return: True if flag, false otherwise
         @rtype: boolean
         """
-        if src_img == 'squelettes/img/valide.png':
+        if 'squelettes/img/valide.svg' in src_img:
             return True
-        elif src_img == 'squelettes/img/pas_valide.png':
+        elif 'squelettes/img/pas_valide.svg' in src_img:
             return False
         else:
             return None
@@ -153,7 +121,7 @@ class parser_html(object):
         @return: Js line with challenges stats
         @rtype: string
         """
-        js_pattern = re.compile(".*evolution_data\d\.push.*")
+        js_pattern = re.compile(".*validations.push\({\n'date'\s*:\s'(?P<datetime>.*)',\n'titre'\s*:\s'<a\shref=\"https://www.root-me.org/fr/Challenges/(?P<category>.*)/\"\stitle=\".*\"><img\ssrc=\".*\"\sclass=\"vmiddle\"/></a>\s*<a\shref=\"(?P<url>.*)\">(?P<name>.*)</a>',\n'difficulte'\s*:\s(?P<difficulty>\d),\n'score'\s*:\s(?P<score>\d*),\s\n}\);.*")
         js_challenges = js_pattern.findall(raw_js)
 
         if js_challenges is not None:
@@ -177,8 +145,7 @@ class parser_html(object):
         parse_challenge = re.match(regex_parse_challenge, str(js))
 
         if parse_challenge is not None:
-            regex_get_category = "fr\/Challenges\/(?P<challenge_category>[\w\W]*)\/[\w\W]*"
-            parse_challenge_category = re.match(regex_get_category, str(parse_challenge.group('challenge_url')))
+            parse_challenge_category = self.get_category_name(str(parse_challenge.group('challenge_url')))
             solved_datetime = datetime.strptime(parse_challenge.group('datetime'), "%Y-%m-%d %H:%M:%S")
             parse_challenge = {'name': parse_challenge.group('challenge_name'), 'category': parse_challenge_category.group('challenge_category'), 'url': 'https://www.root-me.org/' + parse_challenge.group('challenge_url'), 'difficulty': self.get_difficulty_challenge(int(parse_challenge.group('difficulty'))), 'total_score_difficulty': int(parse_challenge.group('score_difficulty')), 'datetime': solved_datetime}
 
@@ -207,5 +174,24 @@ class parser_html(object):
             return 'hard'
         elif difficulty_number == 36:
             return 'very hard'
+        else:
+            return None
+
+    def get_category_name(self, category):
+        """
+        Return the name of the category in a URL
+        @param self: Object himself
+        @type value: Object
+        @param category: URL of the category
+        @type value: string
+
+        @return: Category name
+        @rtype: string
+        """
+        regex_get_category = "fr\/Challenges\/(?P<challenge_category>[\w\W]*)\/[\w\W]*"
+        parsed_category = re.match(regex_get_category, category)
+
+        if parsed_category is not None:
+            return parsed_category.group('challenge_category')
         else:
             return None

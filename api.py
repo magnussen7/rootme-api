@@ -4,7 +4,7 @@ from rootme_class.scrapper import scrapper
 from flask import Flask, redirect, jsonify
 
 app = Flask(__name__)
-app.config["JSON_SORT_KEYS"] = False
+app.config['JSON_SORT_KEYS'] = False
 
 @app.route('/', methods=['GET'])
 def home():
@@ -14,7 +14,24 @@ def home():
 	@return: Creator and creator Team
 	@rtype: json
 	"""
-	return jsonify({"Created by": "Magnussen", "Team": "funcMyLife()"})
+	presentation = {
+						"Creator": {
+							"Created by": "Magnussen",
+							"Root-Me Profile": "https://www.root-me.org/Magnussen",
+							"Personal Website": "https://www.magnussen.funcmylife.fr",
+							"Github Profile": "https://github.com/magnussen7",
+							"Gitlab Profile": "https://gitlab.com/magnussen7",
+							"Twitter Profile": "https://twitter.com/_magnussen_"
+						},
+						"Team": {
+							"Team": "funcMyLife()",
+							"Team Website": "https://www.funcmylife.fr",
+							"Github Profile": "https://github.com/funcMyLife",
+							"Gitlab Profile": "https://gitlab.com/funcmylife"
+						}
+					}
+
+	return jsonify(presentation)
 
 @app.route('/<username>', methods=['GET'])
 def info(username):

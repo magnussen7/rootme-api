@@ -24,15 +24,59 @@ Example :
 {
 	"info":
 	{
-		"username":"Magnussen",
-		"lang":"fr",
-		"status":"Visiteur",
-		"score":3570,
-		"post":0,
+		"achievements":
+		[
+			{"title":"Web developer Rookie : a valid\u00e9 50% des challenges de type web-client"},
+			{"title":"Steganograph Rookie : a valid\u00e9 50% des challenges de type st\u00e9ganographie"},
+			{"title":"Web Admin Rookie : a valid\u00e9 50% des challenges de type web-serveur"},
+			{"title":"Net Admin Newbie : a valid\u00e9 25% des challenges de type r\u00e9seau"},
+			{"title":"Sys Admin Newbie : a valid\u00e9 25% des challenges de type app-script"},
+			{"title":"Forensic Newbie : a valid\u00e9 25% des challenges de type forensic"}
+		],
+		"bio":"<p>CTF player | Member of funcMyLife()</p>",
 		"chatbox":0,
-		"website":null,
-		"bio":"<p>CTF player | Member of funcMyLife()</p>"
-	}
+		"ctf_solved":5,
+		"lang":"fr",
+		"logo":"https://www.root-me.org/local/cache-vignettes/L96xH96/auton89823-eb677.jpg
+		,
+		"post":0,
+		"rank":737,
+		"score":
+		{
+			"category":
+			[
+				{"name":"Web - Client","progression":"73%"},
+				{"name":"Programmation","progression":"46%"},
+				{"name":"Cryptanalyse","progression":"33%"},
+				{"name":"St\u00e9ganographie","progression":"52%"},
+				{"name":"Web - Serveur","progression":"100%"},
+				{"name":"Cracking","progression":"22%"},
+				{"name":"R\u00e9aliste","progression":"48%"},
+				{"name":"R\u00e9seau","progression":"50%"},
+				{"name":"App - Script","progression":"56%"},
+				{"name":"App - Syst\u00e8me","progression":"8%"},
+				{"name":"Forensic","progression":"40%"}
+			],
+			"last_10_flags":
+			[
+				{"category":"Realiste","name":"IPBX - call me maybe"},
+				{"category":"CTF All the day","name":"VulnVoIP"},
+				{"category":"Programmation","name":"Quick Response Code"},
+				{"category":"App-Script","name":"Python - PyJail 2"},
+				{"category":"Web-Serveur","name":"Insecure Code Management"},
+				{"category":"Forensic","name":"Exfiltration DNS"},
+				{"category":"Web-Serveur","name":"JSON Web Token (JWT) - Secret faible"},
+				{"category":"Web-Serveur","name":"JSON Web Token (JWT) - Cl\u00e9 publique"},
+				{"category":"Web-Serveur","name":"JSON Web Token (JWT) - Introduction"},
+				{"category":"Web-Client","name":"XSS - Stock\u00e9e 2"}
+			],
+			"solved_challenges":165,
+			"total_challenges":356,
+			"total_progression":"46%"
+		},
+		"solved_challenges":165,
+		"status":"Visiteur",
+		"website":"https://www.magnussen.funcmylife.fr"}
 }
 ```
 
