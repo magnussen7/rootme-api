@@ -1,14 +1,14 @@
 # Root-me API
 
-Python script wich create an API for https://www.root-me.org
+A python script which creates an API for https://www.root-me.org
 
-### List of endpoints
+## List of endpoints
 
 You need to use the username from the profile url.  
 Exemple :  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.root-me.org/Magnussen?lang=fr
 
-#### API info : /
+### API info : /
 Example :
 ```
 > curl 127.0.0.1:7777
@@ -17,7 +17,7 @@ Example :
 	"Team":"funcMyLife()"
 }
 ```
-#### User info : /*username*
+### User info : /*username*
 Example :
 ```
 > curl 127.0.0.1:7777/Magnussen
@@ -80,7 +80,7 @@ Example :
 }
 ```
 
-#### User info : /*username*/challenges
+### User info : /*username*/challenges
 Example :
 ```
 > curl 127.0.0.1:7777/Magnussen/challenges
@@ -128,7 +128,7 @@ Example :
 }
 ```
 
-#### User info : /*username*/ctf
+### User info : /*username*/ctf
 Example :
 ```
 > curl 127.0.0.1:7777/Magnussen/ctf
@@ -162,7 +162,7 @@ Example :
 }
 ```
 
-#### User info : /*username*/stats
+### User info : /*username*/stats
 Example :
 ```
 > curl 127.0.0.1:7777/Magnussen/stats
@@ -204,7 +204,7 @@ Example :
 }
 ```
 
-### Installing
+## Installing
 
 First you have to clone this repo :
 ```
