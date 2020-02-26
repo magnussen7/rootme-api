@@ -5,7 +5,7 @@ A python script which creates an API for https://www.root-me.org
 ## List of endpoints
 
 You need to use the username from the profile url.  
-Exemple :  
+Example :  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.root-me.org/Magnussen?lang=fr
 
 ### API info : /
